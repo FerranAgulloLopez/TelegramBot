@@ -13,6 +13,8 @@ def LexerPlusTokenizer(inputStream):
     
 def Parser(tokenStream):
     parser = EnquestesParser(tokenStream)
+    #tree = parser.root()
+    #print(tree.toStringTree(recog=parser))
     return parser.root()
 
 def crearGraf(nodes, arestes):
@@ -46,6 +48,9 @@ def crearGraf(nodes, arestes):
     nx.draw_networkx_edge_labels(G, pos=nx.circular_layout(G), edge_labels=etiquetesAlternatives, font_color='green')
     plt.savefig('data/'+nom+'.png')
 
+    print(G.nodes.data()['E'])
+    print(list(G.neighbors('E')))
+    print(G.nodes['P1'])
     return nom, G
 
 

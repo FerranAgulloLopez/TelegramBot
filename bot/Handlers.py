@@ -24,6 +24,7 @@ class Handlers:
         handlers.append(CommandHandler('show', self.show))
         handlers.append(CommandHandler('select', self.select))
         handlers.append(CommandHandler('diagram', self.diagram))
+        handlers.append(CommandHandler('quiz', self.quiz))
         # echo_handler = MessageHandler(Filters.text, echo)
         # dispatcher.add_handler(echo_handler)
         return handlers
@@ -53,4 +54,9 @@ class Handlers:
             path = self.dataReader.pathDiagrama(self.state.nom_enquesta_seleccionada)
             context.bot.send_photo(chat_id=update.message.chat_id, photo=open(path, 'rb'))
         else:
-            self.sendMessage(update, context, 'No hi ha una enquesta seleccionada')
+            self.sendMessage(update, context, 'No hi ha cap enquesta seleccionada')
+
+    def quiz(self, update, context):
+        text = self.state.comencarEnquesta()
+        for message in text:
+            self.sendMessage(update, context, message)

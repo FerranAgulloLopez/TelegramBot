@@ -7,38 +7,37 @@ import sys
 
 def serializedATN():
     with StringIO() as buf:
-        buf.write("\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\27")
-        buf.write("g\4\2\t\2\4\3\t\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7\4\b")
+        buf.write("\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\30")
+        buf.write("d\4\2\t\2\4\3\t\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7\4\b")
         buf.write("\t\b\4\t\t\t\4\n\t\n\4\13\t\13\4\f\t\f\3\2\3\2\3\2\3\2")
         buf.write("\6\2\35\n\2\r\2\16\2\36\3\2\3\2\3\2\3\2\3\3\3\3\3\3\3")
         buf.write("\3\3\3\3\3\3\4\3\4\3\4\3\4\6\4/\n\4\r\4\16\4\60\3\5\3")
         buf.write("\5\3\5\3\5\3\5\3\5\3\5\3\6\3\6\3\6\3\6\3\6\3\6\6\6@\n")
         buf.write("\6\r\6\16\6A\3\6\3\6\3\7\3\7\3\7\3\7\6\7J\n\7\r\7\16\7")
         buf.write("K\3\b\3\b\3\b\3\b\3\b\3\t\3\t\3\t\3\t\3\t\3\t\7\tY\n\t")
-        buf.write("\f\t\16\t\\\13\t\3\n\3\n\3\13\3\13\3\f\6\fc\n\f\r\f\16")
-        buf.write("\fd\3\f\2\2\r\2\4\6\b\n\f\16\20\22\24\26\2\2\2d\2\34\3")
-        buf.write("\2\2\2\4$\3\2\2\2\6*\3\2\2\2\b\62\3\2\2\2\n9\3\2\2\2\f")
-        buf.write("E\3\2\2\2\16M\3\2\2\2\20R\3\2\2\2\22]\3\2\2\2\24_\3\2")
-        buf.write("\2\2\26b\3\2\2\2\30\35\5\4\3\2\31\35\5\6\4\2\32\35\5\b")
-        buf.write("\5\2\33\35\5\n\6\2\34\30\3\2\2\2\34\31\3\2\2\2\34\32\3")
-        buf.write("\2\2\2\34\33\3\2\2\2\35\36\3\2\2\2\36\34\3\2\2\2\36\37")
-        buf.write("\3\2\2\2\37 \3\2\2\2 !\5\f\7\2!\"\7\3\2\2\"#\7\2\2\3#")
-        buf.write("\3\3\2\2\2$%\5\24\13\2%&\7\4\2\2&\'\7\5\2\2\'(\5\26\f")
-        buf.write("\2()\7\6\2\2)\5\3\2\2\2*+\5\24\13\2+,\7\4\2\2,.\7\7\2")
-        buf.write("\2-/\5\16\b\2.-\3\2\2\2/\60\3\2\2\2\60.\3\2\2\2\60\61")
-        buf.write("\3\2\2\2\61\7\3\2\2\2\62\63\5\24\13\2\63\64\7\4\2\2\64")
-        buf.write("\65\7\b\2\2\65\66\5\24\13\2\66\67\7\t\2\2\678\5\24\13")
-        buf.write("\28\t\3\2\2\29:\5\24\13\2:;\7\4\2\2;<\7\n\2\2<=\5\24\13")
-        buf.write("\2=?\7\13\2\2>@\5\20\t\2?>\3\2\2\2@A\3\2\2\2A?\3\2\2\2")
-        buf.write("AB\3\2\2\2BC\3\2\2\2CD\7\f\2\2D\13\3\2\2\2EF\7\r\2\2F")
-        buf.write("G\7\4\2\2GI\7\16\2\2HJ\5\24\13\2IH\3\2\2\2JK\3\2\2\2K")
-        buf.write("I\3\2\2\2KL\3\2\2\2L\r\3\2\2\2MN\5\22\n\2NO\7\4\2\2OP")
-        buf.write("\5\26\f\2PQ\7\17\2\2Q\17\3\2\2\2RS\7\20\2\2ST\5\22\n\2")
-        buf.write("TU\7\21\2\2UV\5\24\13\2VZ\7\22\2\2WY\7\21\2\2XW\3\2\2")
-        buf.write("\2Y\\\3\2\2\2ZX\3\2\2\2Z[\3\2\2\2[\21\3\2\2\2\\Z\3\2\2")
-        buf.write("\2]^\7\25\2\2^\23\3\2\2\2_`\7\23\2\2`\25\3\2\2\2ac\7\24")
-        buf.write("\2\2ba\3\2\2\2cd\3\2\2\2db\3\2\2\2de\3\2\2\2e\27\3\2\2")
-        buf.write("\2\t\34\36\60AKZd")
+        buf.write("\f\t\16\t\\\13\t\3\n\3\n\3\13\3\13\3\f\3\f\3\f\2\2\r\2")
+        buf.write("\4\6\b\n\f\16\20\22\24\26\2\2\2`\2\34\3\2\2\2\4$\3\2\2")
+        buf.write("\2\6*\3\2\2\2\b\62\3\2\2\2\n9\3\2\2\2\fE\3\2\2\2\16M\3")
+        buf.write("\2\2\2\20R\3\2\2\2\22]\3\2\2\2\24_\3\2\2\2\26a\3\2\2\2")
+        buf.write("\30\35\5\4\3\2\31\35\5\6\4\2\32\35\5\b\5\2\33\35\5\n\6")
+        buf.write("\2\34\30\3\2\2\2\34\31\3\2\2\2\34\32\3\2\2\2\34\33\3\2")
+        buf.write("\2\2\35\36\3\2\2\2\36\34\3\2\2\2\36\37\3\2\2\2\37 \3\2")
+        buf.write("\2\2 !\5\f\7\2!\"\7\3\2\2\"#\7\2\2\3#\3\3\2\2\2$%\5\24")
+        buf.write("\13\2%&\7\4\2\2&\'\7\5\2\2\'(\5\26\f\2()\7\6\2\2)\5\3")
+        buf.write("\2\2\2*+\5\24\13\2+,\7\4\2\2,.\7\7\2\2-/\5\16\b\2.-\3")
+        buf.write("\2\2\2/\60\3\2\2\2\60.\3\2\2\2\60\61\3\2\2\2\61\7\3\2")
+        buf.write("\2\2\62\63\5\24\13\2\63\64\7\4\2\2\64\65\7\b\2\2\65\66")
+        buf.write("\5\24\13\2\66\67\7\t\2\2\678\5\24\13\28\t\3\2\2\29:\5")
+        buf.write("\24\13\2:;\7\4\2\2;<\7\n\2\2<=\5\24\13\2=?\7\13\2\2>@")
+        buf.write("\5\20\t\2?>\3\2\2\2@A\3\2\2\2A?\3\2\2\2AB\3\2\2\2BC\3")
+        buf.write("\2\2\2CD\7\f\2\2D\13\3\2\2\2EF\7\r\2\2FG\7\4\2\2GI\7\16")
+        buf.write("\2\2HJ\5\24\13\2IH\3\2\2\2JK\3\2\2\2KI\3\2\2\2KL\3\2\2")
+        buf.write("\2L\r\3\2\2\2MN\5\22\n\2NO\7\4\2\2OP\5\26\f\2PQ\7\17\2")
+        buf.write("\2Q\17\3\2\2\2RS\7\20\2\2ST\5\22\n\2TU\7\21\2\2UV\5\24")
+        buf.write("\13\2VZ\7\22\2\2WY\7\21\2\2XW\3\2\2\2Y\\\3\2\2\2ZX\3\2")
+        buf.write("\2\2Z[\3\2\2\2[\21\3\2\2\2\\Z\3\2\2\2]^\7\26\2\2^\23\3")
+        buf.write("\2\2\2_`\7\23\2\2`\25\3\2\2\2ab\7\24\2\2b\27\3\2\2\2\b")
+        buf.write("\34\36\60AKZ")
         return buf.getvalue()
 
 
@@ -60,7 +59,8 @@ class EnquestesParser ( Parser ):
                       "<INVALID>", "<INVALID>", "<INVALID>", "<INVALID>", 
                       "<INVALID>", "<INVALID>", "<INVALID>", "<INVALID>", 
                       "<INVALID>", "<INVALID>", "<INVALID>", "<INVALID>", 
-                      "<INVALID>", "ID", "WORD", "DIGIT", "WS", "LINE_COMMENT" ]
+                      "<INVALID>", "ID", "SENTENCE", "WORD", "DIGIT", "SL", 
+                      "LINE_COMMENT" ]
 
     RULE_root = 0
     RULE_pregunta = 1
@@ -96,10 +96,11 @@ class EnquestesParser ( Parser ):
     T__14=15
     T__15=16
     ID=17
-    WORD=18
-    DIGIT=19
-    WS=20
-    LINE_COMMENT=21
+    SENTENCE=18
+    WORD=19
+    DIGIT=20
+    SL=21
+    LINE_COMMENT=22
 
     def __init__(self, input:TokenStream, output:TextIO = sys.stdout):
         super().__init__(input, output)
@@ -698,11 +699,8 @@ class EnquestesParser ( Parser ):
             super().__init__(parent, invokingState)
             self.parser = parser
 
-        def WORD(self, i:int=None):
-            if i is None:
-                return self.getTokens(EnquestesParser.WORD)
-            else:
-                return self.getToken(EnquestesParser.WORD, i)
+        def SENTENCE(self):
+            return self.getToken(EnquestesParser.SENTENCE, 0)
 
         def getRuleIndex(self):
             return EnquestesParser.RULE_text
@@ -720,21 +718,10 @@ class EnquestesParser ( Parser ):
 
         localctx = EnquestesParser.TextContext(self, self._ctx, self.state)
         self.enterRule(localctx, 20, self.RULE_text)
-        self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 96 
-            self._errHandler.sync(self)
-            _la = self._input.LA(1)
-            while True:
-                self.state = 95
-                self.match(EnquestesParser.WORD)
-                self.state = 98 
-                self._errHandler.sync(self)
-                _la = self._input.LA(1)
-                if not (_la==EnquestesParser.WORD):
-                    break
-
+            self.state = 95
+            self.match(EnquestesParser.SENTENCE)
         except RecognitionException as re:
             localctx.exception = re
             self._errHandler.reportError(self, re)
