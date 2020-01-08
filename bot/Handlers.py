@@ -51,7 +51,7 @@ class Handlers:
             self.sendMessage(update, context, message)
 
     def diagram(self, update, context):
-        if self.state.g:
+        if self.state.isEnquestaSeleccionada:
             path = self.dataReader.pathDiagrama(self.state.nom_g)
             context.bot.send_photo(chat_id=update.message.chat_id, photo=open(path, 'rb'))
         else:
@@ -67,3 +67,10 @@ class Handlers:
         text = self.state.entradaText(entrada)
         for message in text:
             self.sendMessage(update, context, message)
+
+    def pie(self, update, context):
+        if self.state.isEnquestaSeleccionada:
+            path = self.dataReader.pathDiagrama(self.state.nom_g)
+            context.bot.send_photo(chat_id=update.message.chat_id, photo=open(path, 'rb'))
+        else:
+            self.sendMessage(update, context, 'No hi ha cap enquesta seleccionada')

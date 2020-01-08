@@ -15,22 +15,10 @@ def LexerPlusTokenizer(inputStream):
 
 def Parser(tokenStream):
     parser = EnquestesParser(tokenStream)
-    #tree = parser.root()
-    #print(tree.toStringTree(recog=parser))
     return parser.root()
 
 
 def crearGraf(nodes, arestes):
-    # buscar el nom de l'enquesta
-    nom = None
-    for node in nodes:
-        if len(node) > 1:
-            data = node[-1]
-            tipus = data['tipus']
-            if tipus == 'enquesta':
-                nom = data['identificador']
-                break
-
     G = nx.DiGraph()
     G.add_nodes_from(nodes)
     G.add_edges_from(arestes)
@@ -49,19 +37,14 @@ def crearGraf(nodes, arestes):
                 etiquetesAlternatives[(aresta[0], aresta[1])] = data['identificador']
     nx.draw_networkx_edge_labels(G, pos=nx.circular_layout(G), edge_labels=etiquetesItems, font_color='red')
     nx.draw_networkx_edge_labels(G, pos=nx.circular_layout(G), edge_labels=etiquetesAlternatives, font_color='green')
-    plt.savefig('data/' + nom + '.png')
-
-    node = G['P1']
-    for aux in node:
-        print(aux)
-        print(G['P1'][aux])
-    print(G['P1'])
+    nom = [nbr for nbr in G.nodes() if G.nodes[nbr]['tipus'] == 'enquesta'][0]
+    plt.savefig('data/quizs/' + nom + '.png')
 
     return nom, G
 
 
 def pickleDump(graf, filename):
-    outfile = open('data/' + filename + '.data', 'wb')
+    outfile = open('data/quizs/' + filename + '.data', 'wb')
     pickle.dump(graf, outfile)
     outfile.close()
 

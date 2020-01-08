@@ -2,6 +2,12 @@
 bot/token.txt
 .idea/
 
+#cl
+cl/Enquestes.interp
+cl/Enquestes.tokens
+cl/EnquestesLexer.interp
+cl/EnquestesLexer.tokens
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]

@@ -13,6 +13,7 @@ class State:
         self.nom_g = None
         self.pregunta_actual = None
         self.opcions_actuals = None
+        self.report = None
         self.data = DataManager()
 
     def seleccionarEnquesta(self, nom):
@@ -46,6 +47,7 @@ class State:
             else:
                 self.estat_actual = 2
             self.pregunta_actual = list(self.g.neighbors(self.nom_g))[0]
+            self.report = {}
             text.append(self.textPregunta(self.pregunta_actual))
             return text
 
@@ -55,6 +57,7 @@ class State:
             if entrada not in self.opcions_actuals:
                 text.append('L\'opció seleccionada no és una de les mencionades. Si us plau indiqueu una de les opcions següents: ' + str(self.opcions_actuals))
             else:
+                self.report[self.pregunta_actual] = {entrada: 1}
                 text.append('Has seleccionat l\'opció ' + entrada)
                 veins = self.g[self.pregunta_actual]
                 alternatives = {}
@@ -76,6 +79,7 @@ class State:
                     else:
                         text.append('Enquesta finalitzada. Moltíssimes gràcies!')
                         self.estat_actual = 1
+                        self.data.guardarReport(self.nom_g, self.report)
         return text
 
 

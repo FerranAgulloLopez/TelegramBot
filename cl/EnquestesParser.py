@@ -7,7 +7,7 @@ import sys
 
 def serializedATN():
     with StringIO() as buf:
-        buf.write("\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\27")
+        buf.write("\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\26")
         buf.write("g\4\2\t\2\4\3\t\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7\4\b")
         buf.write("\t\b\4\t\t\t\4\n\t\n\4\13\t\13\4\f\t\f\3\2\3\2\3\2\3\2")
         buf.write("\6\2\35\n\2\r\2\16\2\36\3\2\3\2\3\2\3\2\3\3\3\3\3\3\3")
@@ -30,13 +30,13 @@ def serializedATN():
         buf.write("\65\7\b\2\2\65\66\5\24\13\2\66\67\7\t\2\2\678\5\24\13")
         buf.write("\28\t\3\2\2\29:\5\24\13\2:;\7\4\2\2;<\7\n\2\2<=\5\24\13")
         buf.write("\2=?\7\13\2\2>@\5\20\t\2?>\3\2\2\2@A\3\2\2\2A?\3\2\2\2")
-        buf.write("AB\3\2\2\2BC\3\2\2\2CD\7\f\2\2D\13\3\2\2\2EF\7\r\2\2F")
-        buf.write("G\7\4\2\2GI\7\16\2\2HJ\5\24\13\2IH\3\2\2\2JK\3\2\2\2K")
+        buf.write("AB\3\2\2\2BC\3\2\2\2CD\7\f\2\2D\13\3\2\2\2EF\7\23\2\2")
+        buf.write("FG\7\4\2\2GI\7\r\2\2HJ\5\24\13\2IH\3\2\2\2JK\3\2\2\2K")
         buf.write("I\3\2\2\2KL\3\2\2\2L\r\3\2\2\2MN\5\22\n\2NO\7\4\2\2OP")
-        buf.write("\5\26\f\2PQ\7\17\2\2Q\17\3\2\2\2RS\7\20\2\2ST\5\22\n\2")
-        buf.write("TU\7\21\2\2UV\5\24\13\2VZ\7\22\2\2WY\7\21\2\2XW\3\2\2")
+        buf.write("\5\26\f\2PQ\7\16\2\2Q\17\3\2\2\2RS\7\17\2\2ST\5\22\n\2")
+        buf.write("TU\7\20\2\2UV\5\24\13\2VZ\7\21\2\2WY\7\20\2\2XW\3\2\2")
         buf.write("\2Y\\\3\2\2\2ZX\3\2\2\2Z[\3\2\2\2[\21\3\2\2\2\\Z\3\2\2")
-        buf.write("\2]^\7\25\2\2^\23\3\2\2\2_`\7\23\2\2`\25\3\2\2\2ac\7\24")
+        buf.write("\2]^\7\24\2\2^\23\3\2\2\2_`\7\22\2\2`\25\3\2\2\2ac\7\23")
         buf.write("\2\2ba\3\2\2\2cd\3\2\2\2db\3\2\2\2de\3\2\2\2e\27\3\2\2")
         buf.write("\2\t\34\36\60AKZd")
         return buf.getvalue()
@@ -53,14 +53,14 @@ class EnquestesParser ( Parser ):
     sharedContextCache = PredictionContextCache()
 
     literalNames = [ "<INVALID>", "'END'", "':'", "'PREGUNTA'", "'?'", "'RESPOSTA'", 
-                     "'ITEM'", "'->'", "'ALTERNATIVA'", "'['", "']'", "'E'", 
-                     "'ENQUESTA'", "';'", "'('", "','", "')'" ]
+                     "'ITEM'", "'->'", "'ALTERNATIVA'", "'['", "']'", "'ENQUESTA'", 
+                     "';'", "'('", "','", "')'" ]
 
     symbolicNames = [ "<INVALID>", "<INVALID>", "<INVALID>", "<INVALID>", 
                       "<INVALID>", "<INVALID>", "<INVALID>", "<INVALID>", 
                       "<INVALID>", "<INVALID>", "<INVALID>", "<INVALID>", 
                       "<INVALID>", "<INVALID>", "<INVALID>", "<INVALID>", 
-                      "<INVALID>", "ID", "WORD", "DIGIT", "SL", "LINE_COMMENT" ]
+                      "ID", "WORD", "DIGIT", "SL", "LINE_COMMENT" ]
 
     RULE_root = 0
     RULE_pregunta = 1
@@ -94,12 +94,11 @@ class EnquestesParser ( Parser ):
     T__12=13
     T__13=14
     T__14=15
-    T__15=16
-    ID=17
-    WORD=18
-    DIGIT=19
-    SL=20
-    LINE_COMMENT=21
+    ID=16
+    WORD=17
+    DIGIT=18
+    SL=19
+    LINE_COMMENT=20
 
     def __init__(self, input:TokenStream, output:TextIO = sys.stdout):
         super().__init__(input, output)
@@ -438,7 +437,7 @@ class EnquestesParser ( Parser ):
                 self.state = 63 
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
-                if not (_la==EnquestesParser.T__13):
+                if not (_la==EnquestesParser.T__12):
                     break
 
             self.state = 65
@@ -456,6 +455,9 @@ class EnquestesParser ( Parser ):
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
             super().__init__(parent, invokingState)
             self.parser = parser
+
+        def WORD(self):
+            return self.getToken(EnquestesParser.WORD, 0)
 
         def identifier(self, i:int=None):
             if i is None:
@@ -484,11 +486,11 @@ class EnquestesParser ( Parser ):
         try:
             self.enterOuterAlt(localctx, 1)
             self.state = 67
-            self.match(EnquestesParser.T__10)
+            self.match(EnquestesParser.WORD)
             self.state = 68
             self.match(EnquestesParser.T__1)
             self.state = 69
-            self.match(EnquestesParser.T__11)
+            self.match(EnquestesParser.T__10)
             self.state = 71 
             self._errHandler.sync(self)
             _la = self._input.LA(1)
@@ -548,7 +550,7 @@ class EnquestesParser ( Parser ):
             self.state = 77
             self.text()
             self.state = 78
-            self.match(EnquestesParser.T__12)
+            self.match(EnquestesParser.T__11)
         except RecognitionException as re:
             localctx.exception = re
             self._errHandler.reportError(self, re)
@@ -591,21 +593,21 @@ class EnquestesParser ( Parser ):
         try:
             self.enterOuterAlt(localctx, 1)
             self.state = 80
-            self.match(EnquestesParser.T__13)
+            self.match(EnquestesParser.T__12)
             self.state = 81
             self.identifierOpcio()
             self.state = 82
-            self.match(EnquestesParser.T__14)
+            self.match(EnquestesParser.T__13)
             self.state = 83
             self.identifier()
             self.state = 84
-            self.match(EnquestesParser.T__15)
+            self.match(EnquestesParser.T__14)
             self.state = 88
             self._errHandler.sync(self)
             _la = self._input.LA(1)
-            while _la==EnquestesParser.T__14:
+            while _la==EnquestesParser.T__13:
                 self.state = 85
-                self.match(EnquestesParser.T__14)
+                self.match(EnquestesParser.T__13)
                 self.state = 90
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)

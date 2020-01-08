@@ -66,8 +66,8 @@ class EnquestesVisitor(ParseTreeVisitor):
             self.arestes.append(
                 (identificadorPregunta, identificadorResposta, {'identificador': identificador, 'tipus': 'item'}))
 
-    def afegirDefinicioEnquesta(self, items):
-        self.nodes.append(('E', {'identificador': 'E', 'tipus': 'enquesta'}))
+    def afegirDefinicioEnquesta(self, nom, items):
+        self.nodes.append((nom, {'identificador': nom, 'tipus': 'enquesta'}))
         aux = {}
         priorItem = None
         for item in items:
@@ -81,7 +81,7 @@ class EnquestesVisitor(ParseTreeVisitor):
                 aux[item] = True
                 identificadorPregunta = self.items[item]['pregunta']
                 if priorItem == None:
-                    self.arestes.append(('E', identificadorPregunta, {'tipus': 'seguent'}))
+                    self.arestes.append((nom, identificadorPregunta, {'tipus': 'seguent'}))
                 else:
                     self.arestes.append((priorItem, identificadorPregunta, {'tipus': 'seguent'}))
                 priorItem = identificadorPregunta
@@ -152,11 +152,12 @@ class EnquestesVisitor(ParseTreeVisitor):
         self.afegirAlternativa(identificador, identificadorItem, aux)
 
     def visitDefinicioEnquesta(self, ctx: EnquestesParser.DefinicioEnquestaContext):
+        nom = str(ctx.WORD())
         items = ctx.identifier()
         aux = []
         for item in items:
             aux.append(self.visit(item))
-        self.afegirDefinicioEnquesta(aux)
+        self.afegirDefinicioEnquesta(nom, aux)
 
     def visitOpcioResposta(self, ctx: EnquestesParser.OpcioRespostaContext):
         identifier = self.visit(ctx.identifierOpcio())

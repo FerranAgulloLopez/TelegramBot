@@ -6,7 +6,7 @@ pregunta: identifier ':' 'PREGUNTA' text '?';
 resposta: identifier ':' 'RESPOSTA' opcioResposta+;
 item: identifier ':' 'ITEM' identifier '->' identifier;
 alternativa: identifier ':' 'ALTERNATIVA' identifier '[' opcioAlternativa+ ']';
-definicioEnquesta: 'E' ':' 'ENQUESTA' identifier+;
+definicioEnquesta: WORD ':' 'ENQUESTA' identifier+;
 
 
 opcioResposta: identifierOpcio ':' text ';';
