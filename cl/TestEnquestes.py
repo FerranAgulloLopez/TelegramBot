@@ -7,15 +7,18 @@ import networkx as nx
 import matplotlib.pyplot as plt
 import pickle
 
+
 def LexerPlusTokenizer(inputStream):
     lexer = EnquestesLexer(inputStream)
     return CommonTokenStream(lexer)
-    
+
+
 def Parser(tokenStream):
     parser = EnquestesParser(tokenStream)
     #tree = parser.root()
     #print(tree.toStringTree(recog=parser))
     return parser.root()
+
 
 def crearGraf(nodes, arestes):
     # buscar el nom de l'enquesta
@@ -46,18 +49,22 @@ def crearGraf(nodes, arestes):
                 etiquetesAlternatives[(aresta[0], aresta[1])] = data['identificador']
     nx.draw_networkx_edge_labels(G, pos=nx.circular_layout(G), edge_labels=etiquetesItems, font_color='red')
     nx.draw_networkx_edge_labels(G, pos=nx.circular_layout(G), edge_labels=etiquetesAlternatives, font_color='green')
-    plt.savefig('data/'+nom+'.png')
+    plt.savefig('data/' + nom + '.png')
 
-    print(G.nodes.data()['E'])
-    print(list(G.neighbors('E')))
-    print(G.nodes['P1'])
+    node = G['P1']
+    for aux in node:
+        print(aux)
+        print(G['P1'][aux])
+    print(G['P1'])
+
     return nom, G
 
 
-def pickleDump(graf,filename):
-    outfile = open('data/'+filename+'.data', 'wb')
+def pickleDump(graf, filename):
+    outfile = open('data/' + filename + '.data', 'wb')
     pickle.dump(graf, outfile)
     outfile.close()
+
 
 def main():
     inputStream = InputStream(open('cl/TestInput.txt').read().strip())
@@ -65,7 +72,8 @@ def main():
     tree = Parser(tokenStream)
     visitor = EnquestesVisitor()
     nodes, arestes = visitor.visit(tree)
-    nom, graf = crearGraf(nodes,arestes)
+    nom, graf = crearGraf(nodes, arestes)
     pickleDump(graf, nom)
+
 
 main()

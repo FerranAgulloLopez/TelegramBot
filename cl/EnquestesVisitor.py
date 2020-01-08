@@ -1,4 +1,5 @@
 from antlr4 import *
+import re
 from cl.EnquestesParser import EnquestesParser
 
 
@@ -80,9 +81,9 @@ class EnquestesVisitor(ParseTreeVisitor):
                 aux[item] = True
                 identificadorPregunta = self.items[item]['pregunta']
                 if priorItem == None:
-                    self.arestes.append(('E', identificadorPregunta))
+                    self.arestes.append(('E', identificadorPregunta, {'tipus': 'seguent'}))
                 else:
-                    self.arestes.append((priorItem, identificadorPregunta))
+                    self.arestes.append((priorItem, identificadorPregunta, {'tipus': 'seguent'}))
                 priorItem = identificadorPregunta
 
     def afegirAlternativa(self, identificador, identificadorItem, opcions):
@@ -174,5 +175,6 @@ class EnquestesVisitor(ParseTreeVisitor):
         return ctx.getText()
 
     def visitText(self, ctx: EnquestesParser.TextContext):
-        #print(ctx.getText())
-        return ctx.getText()
+        aux = re.sub(r'\(\[.*?\]', '', ctx.toStringTree())
+        aux = aux.replace(')', '')
+        return aux

@@ -1,5 +1,5 @@
 from telegram import ParseMode
-from telegram.ext import CommandHandler
+from telegram.ext import CommandHandler, MessageHandler, Filters
 from bot.State import State
 from bot.DataManager import DataManager
 import json
@@ -25,8 +25,7 @@ class Handlers:
         handlers.append(CommandHandler('select', self.select))
         handlers.append(CommandHandler('diagram', self.diagram))
         handlers.append(CommandHandler('quiz', self.quiz))
-        # echo_handler = MessageHandler(Filters.text, echo)
-        # dispatcher.add_handler(echo_handler)
+        handlers.append(MessageHandler(Filters.text, self.input))
         return handlers
 
     def start(self, update, context):
@@ -47,16 +46,24 @@ class Handlers:
 
     def select(self, update, context):
         nom = update.message.text[8:]
-        self.sendMessage(update, context, self.state.seleccionarEnquesta(nom))
+        text = self.state.seleccionarEnquesta(nom)
+        for message in text:
+            self.sendMessage(update, context, message)
 
     def diagram(self, update, context):
-        if self.state.enquesta_seleccionada:
-            path = self.dataReader.pathDiagrama(self.state.nom_enquesta_seleccionada)
+        if self.state.g:
+            path = self.dataReader.pathDiagrama(self.state.nom_g)
             context.bot.send_photo(chat_id=update.message.chat_id, photo=open(path, 'rb'))
         else:
             self.sendMessage(update, context, 'No hi ha cap enquesta seleccionada')
 
     def quiz(self, update, context):
         text = self.state.comencarEnquesta()
+        for message in text:
+            self.sendMessage(update, context, message)
+
+    def input(self, update, context):
+        entrada = update.message.text
+        text = self.state.entradaText(entrada)
         for message in text:
             self.sendMessage(update, context, message)

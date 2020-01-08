@@ -19,5 +19,5 @@ text: WORD+;
 ID: [a-zA-Z]DIGIT+;
 WORD: [a-zA-Z][a-zA-Z0-9\u0080-\u00FF]*;
 DIGIT: [0-9];
-WS: [ \n]+ -> skip;
+SL: [ \n]+ -> skip;
 LINE_COMMENT: '//' ~[\r\n]* -> skip;
