@@ -1,1 +1,6 @@
 antlr4 -Dlanguage=Python3 -no-listener -visitor2 Enquestes.g
+
+implementar no ciclos
+mejorar validacion respuesta, hay un loop inces
+meter el fichero testinput por input
+canclear enquesta

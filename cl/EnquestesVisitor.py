@@ -1,10 +1,11 @@
 from antlr4 import *
-from EnquestesParser import EnquestesParser
+from cl.EnquestesParser import EnquestesParser
+
 
 class EnquestesVisitor(ParseTreeVisitor):
     
     def __init__(self):
-        #per comprovar correctesa
+        # per comprovar correctesa
         self.preguntes = {}
         self.respostes = {}
         self.items = {}
@@ -12,18 +13,18 @@ class EnquestesVisitor(ParseTreeVisitor):
         self.alternatives = {}
         self.arestesAlternatives = {}
         
-        #per crear el graf
+        # per crear el graf
         self.nodes = [] 
         self.arestes = []
     
-    #Mètodes de creació i comprovació del graf
-    
+    # Mètodes de creació i comprovació del graf
+
     def afegirPregunta(self, identificador, text):
         if identificador in self.preguntes: raise Exception('Error al intentar incloure una nova pregunta, l\'identificador està repetit: ' + identificador)
         else:
             self.preguntes[identificador] = True
             self.nodes.append((identificador, {'identificador': identificador, 'tipus': 'pregunta', 'text': text}))
-            
+
     def afegirResposta(self, identificador):
         if identificador in self.respostes: raise Exception('Error al intentar incloure una nova resposta, l\'identificador està repetit: ' + identificador)
         else:
@@ -46,7 +47,7 @@ class EnquestesVisitor(ParseTreeVisitor):
         else:
             self.arestesItems[identificadorPregunta+'-'+identificadorResposta] = True
             self.items[identificador] = {'pregunta': identificadorPregunta, 'resposta': identificadorResposta}
-            self.arestes.append((identificadorPregunta, identificadorResposta, {'identificador': identificador}))
+            self.arestes.append((identificadorPregunta, identificadorResposta, {'identificador': identificador, 'tipus': 'item'}))
             
     def afegirDefinicioEnquesta(self, items):
         self.nodes.append(('E', {'identificador': 'E', 'tipus': 'enquesta'}))
@@ -56,6 +57,7 @@ class EnquestesVisitor(ParseTreeVisitor):
             if item not in self.items: raise Exception('Error al intentar crear l\'enquesta, l\'identificador d\'item següent no existeix: ' + item)
             elif item in aux: raise Exception('Error al intentar crear l\'enquesta, l\'identificador d\'item següent apareix més d\'una vegada: ' + item)
             else:
+                aux[item] = True
                 identificadorPregunta = self.items[item]['pregunta']
                 if priorItem == None: 
                     self.arestes.append(('E',identificadorPregunta))
@@ -63,24 +65,26 @@ class EnquestesVisitor(ParseTreeVisitor):
                     self.arestes.append((priorItem,identificadorPregunta))
                 priorItem = identificadorPregunta
                 
-    def afegirAlternativa(identificador, identificadorItem, opcions):
+    def afegirAlternativa(self, identificador, identificadorItem, opcions):
         if identificador in self.alternatives: raise Exception('Error al intentar incloure una alternativa, l\'identificador està repetit: ' + identificador)
         elif identificadorItem not in self.items: raise Exception('Error al intentar incloure l\'alternativa ' + identificador + ', l\'item següent no existeix: ' + identificadorItem)
+        item = self.items[identificadorItem]
         for identificadorOpcioResposta, identificadorDesti in opcions:
-            identificadorResposta = identificadorItem['resposta']
+            identificadorResposta = item['resposta']
             if identificadorDesti not in self.items: raise Exception('Error al intentar incloure l\'alternativa ' + identificador + ', l\'item destí no existeix: ' + identificadorDesti)
             elif identificadorDesti == identificadorItem: raise Exception('Error al intentar incloure l\'alternativa ' + identificador + ', l\'item destí és igual a l\'orignal: ' + identificadorDesti)
             elif identificadorOpcioResposta not in self.respostes[identificadorResposta]: raise Exception('Error al intentar incloure l\'alternativa ' + identificador + ', l\'opció de resposta següent no existeix: ' + identificadorOpcioResposta)
             else:
-                identificadorPregunta = identificadorItem['pregunta']
-                identificadorPreguntaDesti = identificadorDesti['pregunta']
+                itemDesti = self.items[identificadorDesti]
+                identificadorPregunta = item['pregunta']
+                identificadorPreguntaDesti = itemDesti['pregunta']
                 if (identificadorPregunta+'-'+identificadorOpcioResposta) in self.arestesAlternatives: raise Exception('Error al intentar incloure l\'alternativa ' + identificador + ', l\'item ' + identificadorItem + ' ja té una alternativa amb l\'opció ' + identificadorOpcioResposta)
                 else:
                     self.arestesAlternatives[identificadorPregunta+'-'+identificadorOpcioResposta] = True
-                    self.arestes.append(identificadorPregunta, identificadorPreguntaDesti, {'identificador': identificadorOpcio})
+                    self.arestes.append((identificadorPregunta, identificadorPreguntaDesti, {'identificador': identificadorOpcioResposta, 'tipus': 'alternativa'}))
             
 
-    #Mètodes de visita
+    # Mètodes de visita
     
     def visitRoot(self, ctx:EnquestesParser.RootContext):
         self.visitChildren(ctx)
@@ -108,10 +112,11 @@ class EnquestesVisitor(ParseTreeVisitor):
     def visitAlternativa(self, ctx:EnquestesParser.AlternativaContext):
         identificador = self.visit(ctx.identifier(0))
         identificadorItem = self.visit(ctx.identifier(1))
-        opcions = ctx.opcioResposta()
+        opcions = ctx.opcioAlternativa()
+        aux = []
         for opcio in opcions:
-            identificadorOpcio, identificadorDesti = self.visit(opcio)
-            self.afegirAlternativa(identificador, identificadorItem, identificadorOpcio, identificadorDesti)        
+            aux.append(self.visit(opcio))
+        self.afegirAlternativa(identificador, identificadorItem, aux)        
 
     def visitDefinicioEnquesta(self, ctx:EnquestesParser.DefinicioEnquestaContext):
         items = ctx.identifier()

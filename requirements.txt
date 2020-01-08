@@ -1,1 +1,4 @@
 antlr4-python3-runtime
+networkx
+matplotlib
+python-telegram-bot

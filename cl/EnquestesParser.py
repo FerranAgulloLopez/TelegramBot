@@ -153,6 +153,12 @@ class EnquestesParser ( Parser ):
         def getRuleIndex(self):
             return EnquestesParser.RULE_root
 
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitRoot" ):
+                return visitor.visitRoot(self)
+            else:
+                return visitor.visitChildren(self)
+
 
 
 
@@ -228,6 +234,12 @@ class EnquestesParser ( Parser ):
         def getRuleIndex(self):
             return EnquestesParser.RULE_pregunta
 
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitPregunta" ):
+                return visitor.visitPregunta(self)
+            else:
+                return visitor.visitChildren(self)
+
 
 
 
@@ -274,6 +286,12 @@ class EnquestesParser ( Parser ):
 
         def getRuleIndex(self):
             return EnquestesParser.RULE_resposta
+
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitResposta" ):
+                return visitor.visitResposta(self)
+            else:
+                return visitor.visitChildren(self)
 
 
 
@@ -327,6 +345,12 @@ class EnquestesParser ( Parser ):
         def getRuleIndex(self):
             return EnquestesParser.RULE_item
 
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitItem" ):
+                return visitor.visitItem(self)
+            else:
+                return visitor.visitChildren(self)
+
 
 
 
@@ -378,6 +402,12 @@ class EnquestesParser ( Parser ):
 
         def getRuleIndex(self):
             return EnquestesParser.RULE_alternativa
+
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitAlternativa" ):
+                return visitor.visitAlternativa(self)
+            else:
+                return visitor.visitChildren(self)
 
 
 
@@ -437,6 +467,12 @@ class EnquestesParser ( Parser ):
         def getRuleIndex(self):
             return EnquestesParser.RULE_definicioEnquesta
 
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitDefinicioEnquesta" ):
+                return visitor.visitDefinicioEnquesta(self)
+            else:
+                return visitor.visitChildren(self)
+
 
 
 
@@ -490,6 +526,12 @@ class EnquestesParser ( Parser ):
         def getRuleIndex(self):
             return EnquestesParser.RULE_opcioResposta
 
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitOpcioResposta" ):
+                return visitor.visitOpcioResposta(self)
+            else:
+                return visitor.visitChildren(self)
+
 
 
 
@@ -531,6 +573,12 @@ class EnquestesParser ( Parser ):
 
         def getRuleIndex(self):
             return EnquestesParser.RULE_opcioAlternativa
+
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitOpcioAlternativa" ):
+                return visitor.visitOpcioAlternativa(self)
+            else:
+                return visitor.visitChildren(self)
 
 
 
@@ -582,6 +630,12 @@ class EnquestesParser ( Parser ):
         def getRuleIndex(self):
             return EnquestesParser.RULE_identifierOpcio
 
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitIdentifierOpcio" ):
+                return visitor.visitIdentifierOpcio(self)
+            else:
+                return visitor.visitChildren(self)
+
 
 
 
@@ -612,6 +666,12 @@ class EnquestesParser ( Parser ):
 
         def getRuleIndex(self):
             return EnquestesParser.RULE_identifier
+
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitIdentifier" ):
+                return visitor.visitIdentifier(self)
+            else:
+                return visitor.visitChildren(self)
 
 
 
@@ -646,6 +706,12 @@ class EnquestesParser ( Parser ):
 
         def getRuleIndex(self):
             return EnquestesParser.RULE_text
+
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitText" ):
+                return visitor.visitText(self)
+            else:
+                return visitor.visitChildren(self)
 
 
 

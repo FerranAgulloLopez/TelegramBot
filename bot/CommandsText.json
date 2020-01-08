@@ -1,0 +1,6 @@
+{
+  "start": "Welcome to QuizBot!",
+  "author": "Info: \n - *name*: Ferran Agulló López \n - *email*: ferran.agullo.lopez@est.fib.upc.edu",
+  "help": "Available commands: \n - /author: shows author's name and email \n - /show: shows the available quizs \n - /select <Nom enquesta>: selects one of the available quizs \n - /quiz: asks the user the different questions of the selected quiz \n - /diagram: shows the diagram of the selected quiz",
+  "show": "Available quizs:"
+}
