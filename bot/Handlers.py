@@ -16,6 +16,9 @@ class Handlers:
     def sendMessage(self, update, context, message):
         context.bot.send_message(chat_id=update.effective_chat.id, text=message, parse_mode=ParseMode.MARKDOWN)
 
+    def sendPhoto(self, update, context, path):
+        context.bot.send_photo(chat_id=update.message.chat_id, photo=open(path, 'rb'))
+
     def getHandlers(self):
         handlers = []
         handlers.append(CommandHandler('start', self.start))
@@ -25,6 +28,8 @@ class Handlers:
         handlers.append(CommandHandler('select', self.select))
         handlers.append(CommandHandler('diagram', self.diagram))
         handlers.append(CommandHandler('quiz', self.quiz))
+        handlers.append(CommandHandler('pie', self.pie))
+        handlers.append(CommandHandler('bar', self.bar))
         handlers.append(MessageHandler(Filters.text, self.input))
         return handlers
 
@@ -45,15 +50,16 @@ class Handlers:
         self.sendMessage(update, context, text)
 
     def select(self, update, context):
-        nom = update.message.text[8:]
-        text = self.state.seleccionarEnquesta(nom)
-        for message in text:
-            self.sendMessage(update, context, message)
+        if update.message != None:
+            nom = update.message.text[8:]
+            text = self.state.seleccionarEnquesta(nom)
+            for message in text:
+                self.sendMessage(update, context, message)
 
     def diagram(self, update, context):
         if self.state.isEnquestaSeleccionada:
             path = self.dataReader.pathDiagrama(self.state.nom_g)
-            context.bot.send_photo(chat_id=update.message.chat_id, photo=open(path, 'rb'))
+            self.sendPhoto(update, context, path)
         else:
             self.sendMessage(update, context, 'No hi ha cap enquesta seleccionada')
 
@@ -63,14 +69,28 @@ class Handlers:
             self.sendMessage(update, context, message)
 
     def input(self, update, context):
-        entrada = update.message.text
-        text = self.state.entradaText(entrada)
-        for message in text:
-            self.sendMessage(update, context, message)
+        if update.message != None:
+            entrada = update.message.text
+            text = self.state.entradaText(entrada)
+            for message in text:
+                self.sendMessage(update, context, message)
 
     def pie(self, update, context):
-        if self.state.isEnquestaSeleccionada:
-            path = self.dataReader.pathDiagrama(self.state.nom_g)
-            context.bot.send_photo(chat_id=update.message.chat_id, photo=open(path, 'rb'))
-        else:
-            self.sendMessage(update, context, 'No hi ha cap enquesta seleccionada')
+        if update.message != None:
+            nom = update.message.text[5:]
+            ok, text = self.state.drawPregunta(nom, 'pie')
+            if ok:
+                self.sendPhoto(update, context, text)
+                self.dataReader.borrarAuxiliaryFile(text)
+            else:
+                self.sendMessage(update, context, text)
+
+    def bar(self, update, context):
+        if update.message != None:
+            nom = update.message.text[5:]
+            ok, text = self.state.drawPregunta(nom, 'bar')
+            if ok:
+                self.sendPhoto(update, context, text)
+                self.dataReader.borrarAuxiliaryFile(text)
+            else:
+                self.sendMessage(update, context, text)

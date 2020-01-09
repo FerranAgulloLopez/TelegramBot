@@ -1,6 +1,5 @@
-from os import listdir
-from os.path import abspath
-from os.path import isfile, join
+from os import listdir, remove
+from os.path import isfile, join, abspath
 import pickle
 import re
 
@@ -23,6 +22,9 @@ class DataManager:
     def pathDiagrama(self, nom):
         path = self.pathEnquesta + nom + '.png'
         return abspath(path)
+
+    def reportsDisponibles(self):
+        return {f.replace('.data', '') for f in listdir(self.pathReport) if isfile(join(self.pathReport, f))}
 
     def llegirReport(self, nom):
         path = self.pathReport + nom + '.data'
@@ -51,3 +53,6 @@ class DataManager:
             else:
                 report[pregunta] = report2[pregunta]
         return report
+
+    def borrarAuxiliaryFile(self, path):
+        remove(path)

@@ -1,5 +1,5 @@
 from bot.DataManager import DataManager
-import networkx as nx
+from bot.Painter import Painter
 
 class State:
 
@@ -15,6 +15,7 @@ class State:
         self.opcions_actuals = None
         self.report = None
         self.data = DataManager()
+        self.painter = Painter()
 
     def seleccionarEnquesta(self, nom):
         text = []
@@ -93,4 +94,30 @@ class State:
             opcions.append(node['identificadorOpcioResposta'])
         self.opcions_actuals = opcions
         return text
+
+    def drawPregunta(self, pregunta, tipus):
+        if self.estat_actual == 0:
+            return False, 'No hi ha cap enquesta seleccionada'
+        elif pregunta not in self.g.nodes or self.g.nodes[pregunta]['tipus'] != 'pregunta':
+            return False, 'La pregunta no existeix a l\'enquesta seleccionada'
+        elif self.nom_g not in self.data.reportsDisponibles():
+            return False, 'Encara no s\'ha contestat l\'enquesta cap vegada'
+        else:
+            report = self.data.llegirReport(self.nom_g)
+            if pregunta not in report:
+                return False, 'Encara no s\'ha contestat cap vegada aquesta pregunta'
+            else:
+                resposta = [nbr for nbr in self.g.neighbors(pregunta) if self.g.nodes[nbr]['tipus'] == 'resposta'][0]
+                opcions = [self.g.nodes.data()[nbr]['identificadorOpcioResposta'] for nbr in self.g.adj[resposta]]
+                for aux in opcions:
+                    if aux not in report[pregunta]:
+                        report[pregunta][aux] = 0
+                if tipus == 'pie':
+                    path = self.painter.drawPie(report[pregunta])
+                else:
+                    path = self.painter.drawBar(report[pregunta])
+                return True, path
+
+
+
 
