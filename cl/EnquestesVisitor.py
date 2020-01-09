@@ -19,7 +19,6 @@ class EnquestesVisitor(ParseTreeVisitor):
         self.arestes = []
 
     # Mètodes de creació i comprovació del graf
-
     def afegirPregunta(self, identificador, text):
         if identificador in self.preguntes:
             raise Exception(
@@ -80,7 +79,7 @@ class EnquestesVisitor(ParseTreeVisitor):
             else:
                 aux[item] = True
                 identificadorPregunta = self.items[item]['pregunta']
-                if priorItem == None:
+                if priorItem is None:
                     self.arestes.append((nom, identificadorPregunta, {'tipus': 'seguent'}))
                 else:
                     self.arestes.append((priorItem, identificadorPregunta, {'tipus': 'seguent'}))
@@ -118,7 +117,6 @@ class EnquestesVisitor(ParseTreeVisitor):
                                          {'identificador': identificadorOpcioResposta, 'tipus': 'alternativa'}))
 
     # Mètodes de visita
-
     def visitRoot(self, ctx: EnquestesParser.RootContext):
         self.visitChildren(ctx)
         return self.nodes, self.arestes

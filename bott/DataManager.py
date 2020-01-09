@@ -3,6 +3,7 @@ from os.path import isfile, join, abspath
 import pickle
 import re
 
+
 class DataManager:
 
     def __init__(self):

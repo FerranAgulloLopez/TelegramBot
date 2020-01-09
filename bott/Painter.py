@@ -3,6 +3,7 @@ from functools import reduce
 from datetime import datetime
 from os.path import abspath
 
+
 class Painter:
 
     def drawPie(self, report):

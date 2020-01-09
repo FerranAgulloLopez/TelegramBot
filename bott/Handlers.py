@@ -51,7 +51,7 @@ class Handlers:
         self.sendMessage(update, context, text)
 
     def select(self, update, context):
-        if update.message != None:
+        if update.message is not None:
             nom = update.message.text[8:]
             text = self.state.seleccionarEnquesta(nom)
             for message in text:
@@ -70,14 +70,14 @@ class Handlers:
             self.sendMessage(update, context, message)
 
     def input(self, update, context):
-        if update.message != None:
+        if update.message is not None:
             entrada = update.message.text
             text = self.state.entradaText(entrada)
             for message in text:
                 self.sendMessage(update, context, message)
 
     def pie(self, update, context):
-        if update.message != None:
+        if update.message is not None:
             nom = update.message.text[5:]
             ok, text = self.state.drawPregunta(nom, 'pie')
             if ok:
@@ -87,7 +87,7 @@ class Handlers:
                 self.sendMessage(update, context, text)
 
     def bar(self, update, context):
-        if update.message != None:
+        if update.message is not None:
             nom = update.message.text[5:]
             ok, text = self.state.drawPregunta(nom, 'bar')
             if ok:

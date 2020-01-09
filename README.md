@@ -46,7 +46,7 @@ Per configurar el component en Windows
     - `python3 cl/testEnquestes.py E.txt`
 
 - Executar bot de telegram: S'ha d'executar el programa bot/bot.py:
-    - `python3 bot/bot.py`
+    - `python3 bott/bot.py`
 
 ## License
 

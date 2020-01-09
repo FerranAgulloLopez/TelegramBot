@@ -1,6 +1,7 @@
 from bott.DataManager import DataManager
 from bott.Painter import Painter
 
+
 class State:
 
     def __init__(self):
@@ -9,7 +10,7 @@ class State:
         # 1 -> Enquesta seleccionada
         # 2 -> Realitzant enquesta
         self.estat_actual = 0
-        self.g = None # enquesta seleccionada
+        self.g = None  # enquesta seleccionada
         self.nom_g = None
         self.pregunta_actual = None
         self.opcions_actuals = None
@@ -74,7 +75,7 @@ class State:
                     self.pregunta_actual = alternatives[entrada]
                     text.append(self.textPregunta(self.pregunta_actual))
                 else:
-                    if seguent != None:
+                    if seguent is not None:
                         self.pregunta_actual = seguent
                         text.append(self.textPregunta(self.pregunta_actual))
                     else:
@@ -82,7 +83,6 @@ class State:
                         self.estat_actual = 1
                         self.data.guardarReport(self.nom_g, self.report)
         return text
-
 
     def textPregunta(self, pregunta):
         text = pregunta + '> ' + self.g.nodes[pregunta]['text'] + '? \n'
@@ -138,9 +138,3 @@ class State:
                     message += pregunta + ' ' + resposta + ' ' + str(report[pregunta][resposta]) + '\n'
             text.append(message)
         return text
-
-
-
-
-
-
