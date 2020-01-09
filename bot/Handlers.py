@@ -30,6 +30,7 @@ class Handlers:
         handlers.append(CommandHandler('quiz', self.quiz))
         handlers.append(CommandHandler('pie', self.pie))
         handlers.append(CommandHandler('bar', self.bar))
+        handlers.append(CommandHandler('report', self.report))
         handlers.append(MessageHandler(Filters.text, self.input))
         return handlers
 
@@ -94,3 +95,8 @@ class Handlers:
                 self.dataReader.borrarAuxiliaryFile(text)
             else:
                 self.sendMessage(update, context, text)
+
+    def report(self, update, context):
+        text = self.state.doReport()
+        for message in text:
+            self.sendMessage(update, context, message)

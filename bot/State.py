@@ -113,10 +113,33 @@ class State:
                     if aux not in report[pregunta]:
                         report[pregunta][aux] = 0
                 if tipus == 'pie':
-                    path = self.painter.drawPie(report[pregunta])
+                    path = self.painter.drawPie(self.sortDict(report[pregunta]))
                 else:
-                    path = self.painter.drawBar(report[pregunta])
+                    path = self.painter.drawBar(self.sortDict(report[pregunta]))
                 return True, path
+
+    def sortDict(self, dict):
+        result = {}
+        for aux in sorted(dict.keys()):
+            result[aux] = dict[aux]
+        return result
+
+    def doReport(self):
+        text = []
+        if self.estat_actual == 0:
+            text.append('No hi ha cap enquesta seleccionada')
+        elif self.nom_g not in self.data.reportsDisponibles():
+            text.append('Encara no s\'ha contestat l\'enquesta cap vegada')
+        else:
+            message = '*pregunta* *valor* *respostes* \n'
+            report = self.data.llegirReport(self.nom_g)
+            for pregunta in sorted(report.keys()):
+                for resposta in sorted(report[pregunta].keys()):
+                    message += pregunta + ' ' + resposta + ' ' + str(report[pregunta][resposta]) + '\n'
+            text.append(message)
+        return text
+
+
 
 
 

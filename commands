@@ -5,7 +5,6 @@ alias antlr4='java -Xmx500M -cp "/usr/local/lib/antlr-4.7.1-complete.jar:$CLASSP
 
 implementar no ciclos
 mejorar validacion respuesta, hay un loop inces
-meter el fichero testinput por input
 canclear enquesta
 comprobar que no se repiten los nombres de los nodos pregunta y respuesta iguales
 excepciones coño

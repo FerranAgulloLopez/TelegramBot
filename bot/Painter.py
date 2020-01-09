@@ -5,14 +5,7 @@ from os.path import abspath
 
 class Painter:
 
-    def sortDict(self, dict):
-        result = {}
-        for aux in sorted(dict.keys()):
-            result[aux] = dict[aux]
-        return result
-
     def drawPie(self, report):
-        report = self.sortDict(report)
         labels = list(report.keys())
         values = list(report.values())
         sum = reduce(lambda count, x: count+x, values)
@@ -33,7 +26,6 @@ class Painter:
         return abspath(path)
 
     def drawBar(self, report):
-        report = self.sortDict(report)
         labels = list(report.keys())
         values = list(report.values())
 
