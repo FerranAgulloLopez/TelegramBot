@@ -1,5 +1,5 @@
-from bot_.DataManager import DataManager
-from bot_.Painter import Painter
+from bot.DataManager import DataManager
+from bot.Painter import Painter
 
 class State:
 

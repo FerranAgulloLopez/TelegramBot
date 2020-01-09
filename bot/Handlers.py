@@ -1,14 +1,14 @@
 from telegram import ParseMode
 from telegram.ext import CommandHandler, MessageHandler, Filters
-from bot_.State import State
-from bot_.DataManager import DataManager
+from bot.State import State
+from bot.DataManager import DataManager
 import json
 
 
 class Handlers:
 
     def __init__(self):
-        with open('bot_/CommandsText.json') as file:
+        with open('bot/CommandsText.json') as file:
             self.text = json.load(file)
         self.state = State()
         self.dataReader = DataManager()
