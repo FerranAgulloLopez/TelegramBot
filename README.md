@@ -28,6 +28,9 @@ Per configurar el component en Linux:
 - Generate a virtual environment: python3 -m venv env
 - Activate the virtual environment: source env/bin/activate
 - Install component dependencies with the requirements file: pip3 install -r requirements.txt
+- Configure python path. Type the next commands in terminal changing the path to your project folder path: 
+    - PYTHONPATH=$PYTHONPATH:/home/user/documents/sim-port/src  # or your path to sim-port/src
+    - export PYTHONPATH
 
 Per configurar el component en Windows
 
