@@ -1,9 +1,8 @@
 from telegram.ext import Updater
-from bot.Handlers import Handlers
+from bot_.Handlers import Handlers
 import logging
-import json
 
-TOKEN = open('bot/token.txt').read().strip()
+TOKEN = open('bot_/token.txt').read().strip()
 
 
 def main():
