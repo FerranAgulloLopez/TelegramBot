@@ -6,6 +6,7 @@ from cl.EnquestesVisitor import EnquestesVisitor
 import networkx as nx
 import matplotlib.pyplot as plt
 import pickle
+import sys
 
 
 def LexerPlusTokenizer(inputStream):
@@ -50,7 +51,9 @@ def pickleDump(graf, filename):
 
 
 def main():
-    inputStream = InputStream(open('cl/TestInput.txt').read().strip())
+    nom = sys.argv[1]
+    print("Llegint el fitxer " + nom)
+    inputStream = InputStream(open('cl/input/' + nom).read().strip())
     tokenStream = LexerPlusTokenizer(inputStream)
     tree = Parser(tokenStream)
     visitor = EnquestesVisitor()
